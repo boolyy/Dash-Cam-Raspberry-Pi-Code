@@ -8,16 +8,20 @@ sg.theme('DarkAmber')
 homeLayout = [[sg.Button('Start Recording', size = (20, 20))],
             [sg.Button('Settings')],
             [sg.Button('View Driver Reports')],
-            [sg.Button('Play Sound')]]
+            [sg.Button('Play Sound')],
+            [sg.Button('Cancel')]]
 
 
-homePageWindow = sg.Window('Home', homeLayout, no_titlebar=False, location=(0,0), size = (800,480)) #set no_titlebar to true later
+homePageWindow = sg.Window('Home', homeLayout, no_titlebar=False, location=(0,0), size = (800,480), finalize=True) #set no_titlebar to true later
+homePageWindow.Maximize()
+
 driverReportPage_active = False
 
 while True:
     
     event, values = homePageWindow.read()
-    if event == sg.WIN_CLOSED: # if user closes window, end program
+    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window, end program
+        homePageWindow.Close()
         break
 
     if event == 'Play Sound':
@@ -42,7 +46,9 @@ while True:
         driverReportLayout = [[sg.Button('Ok')], 
                     [sg.Button('Back')]]
 
-        driverReportsPageWindow = sg.Window('Driver Reports', driverReportLayout, no_titlebar=False, location=(0,0), size = (800,480)) #set no_titlebar to true later
+        driverReportsPageWindow = sg.Window('Driver Reports', driverReportLayout, no_titlebar=False, location=(0,0), size = (800,480), finalize = True) #set no_titlebar to true later
+        driverReportsPageWindow.Maximize()
+        
         while True:
             event1, values1 = driverReportsPageWindow.read()
             if event1 == sg.WIN_CLOSED or event1 == 'Back':
