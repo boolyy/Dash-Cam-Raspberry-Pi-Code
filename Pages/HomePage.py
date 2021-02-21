@@ -1,7 +1,8 @@
 import PySimpleGUI as sg
 import pygame
+from DriverReportsPage import DriverReportsPage
 import VoiceAlerts
-from DriverReportsPage import *
+ 
 import datetime
 import time
 
@@ -30,7 +31,7 @@ class HomePage:
 
             if event == 'Play Sound':
                 pygame.mixer.init()
-                pygame.mixer.music.load("voiceAlerts/ranStopSign.mp3")
+                pygame.mixer.music.load("Pages/VoiceAlerts/ranStopSign.mp3")
                 pygame.mixer.music.play()
                 #Code below is not necessary
                 #while pygame.mixer.music.get_busy() == True:

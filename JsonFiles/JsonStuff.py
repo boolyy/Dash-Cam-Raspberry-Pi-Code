@@ -1,5 +1,5 @@
 import json
-import os.path
+import os
 from os import path
 
 class JsonStuff:
