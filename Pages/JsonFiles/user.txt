@@ -3,5 +3,6 @@
     "driverReports": [],
     "voiceToggle": true,
     "collisionDetectionToggle": true,
-    "numOfDriverReports": 0
+    "numOfDriverReports": 0,
+    "dateCreated": ""
 }
