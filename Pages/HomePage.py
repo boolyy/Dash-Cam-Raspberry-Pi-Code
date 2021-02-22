@@ -41,6 +41,7 @@ class HomePage:
                 break
 
             if event == 'Play Sound':
+                print("Clicked Play Sound")
                 pygame.mixer.init()
                 pygame.mixer.music.load("Pages/VoiceAlerts/ranStopSign.mp3")
                 pygame.mixer.music.play()
@@ -50,9 +51,6 @@ class HomePage:
 
             if event == 'Start Recording':
                 print("Clicked Start Recording")
-
-            if event == 'Play Sound':
-                print("Clicked Play Sound")
 
             if event == 'View Driver Reports':  #and not driverReportPage_active:
                 print(user)
