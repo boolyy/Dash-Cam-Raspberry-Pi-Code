@@ -1,12 +1,13 @@
 import PySimpleGUI as sg
 import pygame
-from DriverReportsPage import DriverReportsPage
 import VoiceAlerts
-from VoiceAlerts.VoiceFuncs import VoiceFuncs
-from JsonFiles.JsonFuncs import JsonFuncs
-from RecordingPage import RecordingPage
 import datetime
 import time
+from VoiceAlerts.VoiceFuncs import VoiceFuncs
+from JsonFiles.JsonFuncs import JsonFuncs
+from DriverReportsPage import DriverReportsPage
+from RecordingPage import RecordingPage
+from SettingsPage import SettingsPage
 
 
 class HomePage:
@@ -57,7 +58,9 @@ class HomePage:
             if event == 'Settings':
                 print('Settings')
                 VoiceFuncs.playSound("VoiceAlerts/menuButtonClick.mp3")
-                
+                user = SettingsPage.openSettingsPage(user)
+
+
             #update time
             homePageWindow['-TIME-'].update(time.strftime('%H:%M'))
 
