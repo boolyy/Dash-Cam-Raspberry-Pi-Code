@@ -1,15 +1,17 @@
 import json
 import os
 from os import path
+from datetime import date
 
 #NEED TO WRITE writeUserData Function
 
 
-class LoadUserData:
+class JsonFuncs:
     def loadUserData():
         if (
-                not path.exists('Pages/JsonFiles/user.txt')
+                not path.exists('JsonFiles/user.txt')
         ):  #if file does not exist create user object and write it to a json file
+            today = date.today()
             user = {  #create dict
                 'aveScore': 0,  #aveScore
                 'driverReports':
@@ -19,18 +21,20 @@ class LoadUserData:
                 'collisionDetectionToggle':
                 True,  #if true, then user will hear beeping sound for collision detection
                 'numOfDriverReports': 0,  #used for calculating averages
-                'dateCreated': ''  #date that user's account got reacted
+                'dateCreated': today.strftime(
+                    "%m/%d/%Y")  #date that user's account got creacted
             }
 
-            with open('Pages/JsonFiles/user.txt',
+            with open('JsonFiles/user.txt',
                       'w') as outfile:  #creates txt file with json info
                 json.dump(user, outfile,
                           indent=4)  #indent param used to format json file
         else:  #load data into user object from json file
-            with open('Pages/JsonFiles/user.txt') as jsonFile:
+            with open('JsonFiles/user.txt') as jsonFile:
                 user = json.load(jsonFile)
 
         return user
 
-    def writeUserData():  #writes user object info to JSON file
-        return
+    def writeUserData(user):  #writes user object info to JSON file
+        with open('JsonFiles/user.txt', 'w') as outfile:
+            json.dump(user, outfile, indent=4)

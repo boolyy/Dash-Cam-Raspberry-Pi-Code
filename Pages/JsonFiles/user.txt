@@ -1,8 +1,0 @@
-{
-    "aveScore": 0,
-    "driverReports": [],
-    "voiceToggle": true,
-    "collisionDetectionToggle": true,
-    "numOfDriverReports": 0,
-    "dateCreated": ""
-}

@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-
+from VoiceAlerts.VoiceFuncs import VoiceFuncs
 
 class DriverReportsPage:
     def openDriverReportsPage(homePageWindow, user):
@@ -18,6 +18,7 @@ class DriverReportsPage:
         while True:
             event1, values1 = driverReportsPageWindow.read()
             if event1 == sg.WIN_CLOSED or event1 == 'Back':
+                VoiceFuncs.playSound('VoiceAlerts/menuButtonClick.mp3')
                 driverReportPage_active = False
                 homePageWindow.UnHide()
                 driverReportsPageWindow.Close()
@@ -25,4 +26,5 @@ class DriverReportsPage:
                 return user
                 break
             if event1 == 'Ok':
+                VoiceFuncs.playSound('VoiceAlerts/menuButtonClick.mp3')
                 print("Ok button pressed")

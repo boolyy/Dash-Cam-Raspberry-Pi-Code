@@ -1,0 +1,32 @@
+{
+    "aveScore": 66.66666666666667,
+    "driverReports": [
+        {
+            "score": 100,
+            "date": "02/22/2021",
+            "startTime": "20:50",
+            "endTime": "",
+            "arrayOfIncidents": []
+        },
+        {
+            "score": 100,
+            "date": "02/22/2021",
+            "startTime": "20:55",
+            "endTime": "",
+            "arrayOfIncidents": []
+        },
+        {
+            "score": 100,
+            "date": "02/23/2021",
+            "startTime": "13:27",
+            "endTime": "",
+            "arrayOfIncidents": [
+                "hi"
+            ]
+        }
+    ],
+    "voiceToggle": true,
+    "collisionDetectionToggle": true,
+    "numOfDriverReports": 3,
+    "dateCreated": "02/22/2021"
+}
