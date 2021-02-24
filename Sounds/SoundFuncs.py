@@ -1,6 +1,7 @@
 import pygame
 
-class VoiceFuncs:
+
+class SoundFuncs:
     def playSound(path):
         pygame.mixer.init()
         pygame.mixer.music.load(path) #loads sound from path given

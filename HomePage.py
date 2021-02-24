@@ -1,9 +1,9 @@
 import PySimpleGUI as sg
 import pygame
-import VoiceAlerts
+import Sounds
 import datetime
 import time
-from VoiceAlerts.VoiceFuncs import VoiceFuncs
+from Sounds.SoundFuncs import SoundFuncs
 from JsonFiles.JsonFuncs import JsonFuncs
 from DriverReportsPage import DriverReportsPage
 from RecordingPage import RecordingPage
@@ -38,18 +38,18 @@ class HomePage:
         while True:
             event, values = homePageWindow.read()
             if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window, end program
-                VoiceFuncs.playSound('VoiceAlerts/menuButtonClick.mp3')
+                SoundFuncs.playSound('Sounds/menuButtonClick.mp3')
                 homePageWindow.Close()
                 break
 
             if event == 'Start Recording':
                 print("Clicked Start Recording")
-                VoiceFuncs.playSound("VoiceAlerts/menuButtonClick.mp3")
+                SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = RecordingPage.openRecordingPage(homePageWindow, user)
 
             if event == 'View Driver Reports':  #and not driverReportPage_active:
                 print(user)
-                VoiceFuncs.playSound('VoiceAlerts/menuButtonClick.mp3') #play button click sound
+                SoundFuncs.playSound('Sounds/menuButtonClick.mp3') #play button click sound
                 user = DriverReportsPage.openDriverReportsPage(
                     homePageWindow, user)
                 print("after")
@@ -57,7 +57,7 @@ class HomePage:
 
             if event == 'Settings':
                 print('Settings')
-                VoiceFuncs.playSound("VoiceAlerts/menuButtonClick.mp3")
+                SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = SettingsPage.openSettingsPage(user)
 
 

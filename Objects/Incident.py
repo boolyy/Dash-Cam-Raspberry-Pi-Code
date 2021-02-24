@@ -3,4 +3,4 @@ class incident:
         self.timeOccured = timeOccured  #time that incident happened
         self.incidentType = incidentType
         self.incidentValue = incidentValue
-        self.videoTitle = videoTitle  #string that will contain directory that video is in
+        self.videoTitle = videoTitle  #string that will contain directory that video is in folder

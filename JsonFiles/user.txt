@@ -1,8 +1,8 @@
 {
     "aveScore": 0,
     "driverReports": [],
-    "voiceToggle": false,
-    "collisionDetectionToggle": false,
+    "voiceToggle": true,
+    "collisionDetectionToggle": true,
     "numOfDriverReports": 0,
-    "dateCreated": "02/23/2021"
+    "dateCreated": "02/24/2021"
 }

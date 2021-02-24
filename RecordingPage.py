@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import pygame
+from Sounds.SoundFuncs import SoundFuncs
 from JsonFiles.JsonFuncs import JsonFuncs
 from Objects.DriverReport import DriverReport
 from TripSummaryPage import TripSummaryPage
@@ -7,7 +8,7 @@ from datetime import date
 import time
 
 
-class RecordingPage:
+class RecordingPage: #Page that opens when user starts recording
     def openRecordingPage(homePageWindow, user):
         #Make Driver Report object that will be created once recording is done
         today = date.today()
@@ -30,6 +31,7 @@ class RecordingPage:
             event, values = recordingPageWindow.read()
             if event == sg.WINDOW_CLOSED or event == 'Stop Recording':
                 #update user object
+                SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 driverReport.arrayOfIncidents.append('hi') #NEED TO ADD INCIDENT HERE
                 user['numOfDriverReports'] += 1
                 user['driverReports'].append(driverReport.__dict__)
@@ -37,7 +39,7 @@ class RecordingPage:
                                     ) / user['numOfDriverReports']
                 #user['aveScore'] += 100
                 JsonFuncs.writeUserData(user)  #update JSON file
-                TripSummaryPage.openTripSummaryPage(homePageWindow, user)
+                TripSummaryPage.openTripSummaryPage(homePageWindow, user) #open trip summary page that will show user's a summary of their current trip
                 recordingPageWindow.Close()  #close recording page
 
                 return user
