@@ -1,11 +1,13 @@
-import PySimpleGUI as sg
+import time
+from datetime import date
+
 import pygame
-from Sounds.SoundFuncs import SoundFuncs
+import PySimpleGUI as sg
+
 from JsonFiles.JsonFuncs import JsonFuncs
 from Objects.DriverReport import DriverReport
+from Sounds.SoundFuncs import SoundFuncs
 from TripSummaryPage import TripSummaryPage
-from datetime import date
-import time
 
 
 class RecordingPage: #Page that opens when user starts recording

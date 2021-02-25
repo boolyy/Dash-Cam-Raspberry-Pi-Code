@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
-from Sounds.SoundFuncs import SoundFuncs
+
 from JsonFiles.JsonFuncs import JsonFuncs
+from Sounds.SoundFuncs import SoundFuncs
 
 
 class SettingsPage:

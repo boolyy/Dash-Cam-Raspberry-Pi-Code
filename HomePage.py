@@ -1,13 +1,15 @@
-import PySimpleGUI as sg
-import pygame
-import Sounds
 import datetime
 import time
-from Sounds.SoundFuncs import SoundFuncs
-from JsonFiles.JsonFuncs import JsonFuncs
+
+import pygame
+import PySimpleGUI as sg
+
+import Sounds
 from DriverReportsPage import DriverReportsPage
+from JsonFiles.JsonFuncs import JsonFuncs
 from RecordingPage import RecordingPage
 from SettingsPage import SettingsPage
+from Sounds.SoundFuncs import SoundFuncs
 
 
 class HomePage:
