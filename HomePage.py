@@ -9,6 +9,7 @@ from DriverReportsPage import DriverReportsPage
 from JsonFiles.JsonFuncs import JsonFuncs
 from RecordingPage import RecordingPage
 from SettingsPage import SettingsPage
+from ParkingModePage import ParkingModePage
 from Sounds.SoundFuncs import SoundFuncs
 
 
@@ -23,7 +24,7 @@ class HomePage:
             [sg.Text(text=datetime.datetime.now().strftime('%m/%d/%Y'), key='-DATE-')],
             [sg.Text(text=time.strftime('%H:%M'), key='-TIME-')],
             [sg.Button('Settings')], [sg.Button('View Driver Reports')], 
-            [sg.Button('Cancel')]
+            [sg.Button('Power Off')], [sg.Button('Parking Mode')]
         ]
 
         homePageWindow = sg.Window(
@@ -35,11 +36,10 @@ class HomePage:
             finalize=True)  #set no_titleb ar to true later
         #homePageWindow.Maximize()
 
-        #driverReportPage_active = False
 
         while True:
             event, values = homePageWindow.read()
-            if event == sg.WIN_CLOSED or event == 'Cancel':  # if user closes window, end program
+            if event == sg.WIN_CLOSED or event == 'Power Off':  # if user closes window, end program
                 SoundFuncs.playSound('Sounds/menuButtonClick.mp3')
                 homePageWindow.Close()
                 break
@@ -62,6 +62,10 @@ class HomePage:
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = SettingsPage.openSettingsPage(user)
 
+            if event == 'Parking Mode':
+                print("Parking mode")
+                SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
+                user = ParkingModePage.openParkingModePage(user)
 
             #update time
             homePageWindow['-TIME-'].update(time.strftime('%H:%M'))

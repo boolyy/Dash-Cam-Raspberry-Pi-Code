@@ -1,6 +1,9 @@
-import PySimpleGUI as sg
 import pygame
+import PySimpleGUI as sg
+
+import Sounds
 from Sounds.SoundFuncs import SoundFuncs
+
 
 class TripSummaryPage:
     def openTripSummaryPage(homePageWindow, user):

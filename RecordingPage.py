@@ -6,6 +6,8 @@ import PySimpleGUI as sg
 
 from JsonFiles.JsonFuncs import JsonFuncs
 from Objects.DriverReport import DriverReport
+from Objects.Incident import Incident
+from Objects.User import User
 from Sounds.SoundFuncs import SoundFuncs
 from TripSummaryPage import TripSummaryPage
 
@@ -19,6 +21,7 @@ class RecordingPage: #Page that opens when user starts recording
                                     startTime=time.strftime('%H:%M'),
                                     endTime='',
                                     arrayOfIncidents=[])
+                                    
         recordingPageLayout = [[sg.Button('Stop Recording')]]
 
         recordingPageWindow = sg.Window('Recording',
@@ -28,17 +31,34 @@ class RecordingPage: #Page that opens when user starts recording
                                         size=(800, 480),
                                         finalize=True)
         #recordingPageWindow.Maximize()
-
+        incidentOccured = True
         while True:
+
+            if incidentOccured == True: #if some incident occurs
+                #update current score
+                #make incident object
+                today = date.today()
+                incident = Incident(today.strftime("%m/%d/%Y"), time.strftime('%H:%M'), 
+                                    'Ran over a pedestrian', 100)
+                print("video title " + incident.videoTitle)
+                #alter driver report
+                driverReport.score -= incident.incidentValue
+                driverReport.arrayOfIncidents.append(incident.__dict__) #append incident to list of incidents in a dict format
+                driverReport.arrayOfIncidents.append(incident.__dict__) #append incident to list of incidents in a dict format
+
+                incidentOccured = False
+                
             event, values = recordingPageWindow.read()
+
             if event == sg.WINDOW_CLOSED or event == 'Stop Recording':
                 #update user object
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
-                driverReport.arrayOfIncidents.append('hi') #NEED TO ADD INCIDENT HERE
+                driverReport.endTime = time.strftime('%H:%M') #update end time of driverReport object
                 user['numOfDriverReports'] += 1
                 user['driverReports'].append(driverReport.__dict__)
-                user['aveScore'] = (user['aveScore'] + driverReport.score
-                                    ) / user['numOfDriverReports']
+                #make ave score
+                user['aveScore'] = User.calcAveScore(user)
+                print('Ave Score' + str(user['aveScore']))
                 #user['aveScore'] += 100
                 JsonFuncs.writeUserData(user)  #update JSON file
                 TripSummaryPage.openTripSummaryPage(homePageWindow, user) #open trip summary page that will show user's a summary of their current trip
@@ -46,3 +66,8 @@ class RecordingPage: #Page that opens when user starts recording
 
                 return user
                 break
+
+           
+                
+                
+
