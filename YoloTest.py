@@ -29,7 +29,7 @@ from tools import generate_detections as gdet
 
 sys.path.append('../')
 PROJECT_DIR = os.getcwd()
-
+                             
 #converts YoloV4 model to a tflite supported model (comment out when necessary)
 #converter = tf.lite.TFLiteConverter.from_saved_model(os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-416'))
 #flite_model = converter.convert()
