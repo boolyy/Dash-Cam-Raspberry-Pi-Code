@@ -26,7 +26,7 @@ while True:
     if key == ord('q'):
         break
 
-#prints streaming time
+#prints streaming time (ms)
 print(a)
 
 #Shuts down camera
