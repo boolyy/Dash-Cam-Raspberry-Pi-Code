@@ -6,10 +6,12 @@ from Sounds.SoundFuncs import SoundFuncs
 
 
 class TripSummaryPage:
-    def openTripSummaryPage(homePageWindow, user):
+    def openTripSummaryPage(driverReport):
         #MAKE IT SHOW LIST OF
         #arrOfIncidents = TripSummaryPage.makeListBoxArray(user['driverReports'][len(user['driverReports']) - 1]['arrayOfIncidents']) #creates array that will be displayed in list box
-        tripSummaryLayout = [[sg.Listbox(['hi', 'hi'])], [sg.Button('OK')]]
+        tripSummaryLayout = [[sg.Text(text='Trip Summary')], [sg.Text(text='Incidents')], [sg.Listbox(TripSummaryPage.makeListBoxArray(driverReport['arrayOfIncidents']), size = (30, 6))], 
+                            [sg.Button('OK')]]
+        
         tripSummaryPageWindow = sg.Window('Trip Summary',
                                           tripSummaryLayout,
                                           no_titlebar=False,
@@ -26,6 +28,6 @@ class TripSummaryPage:
     def makeListBoxArray(arrayOfIncidents):  #returns array of strings that will be shown
         arr = []  #array that will be returned
         for i in range(0, len(arrayOfIncidents)):
-            str = arrayOfIncidents[i].timeOccured + "/t" + arrayOfIncidents[i].incidentType
+            str = arrayOfIncidents[i]['timeOccured'] + ' ' + arrayOfIncidents[i]['incidentType']
             arr.append(str)
         return arr

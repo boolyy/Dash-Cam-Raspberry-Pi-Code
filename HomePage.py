@@ -50,12 +50,9 @@ class HomePage:
                 user = RecordingPage.openRecordingPage(homePageWindow, user)
 
             if event == 'View Driver Reports':  #and not driverReportPage_active:
-                print(user)
                 SoundFuncs.playSound('Sounds/menuButtonClick.mp3') #play button click sound
                 user = DriverReportsPage.openDriverReportsPage(
                     homePageWindow, user)
-                print("after")
-                print(user)
 
             if event == 'Settings':
                 print('Settings')

@@ -1,21 +1,27 @@
 import PySimpleGUI as sg
+
+import Sounds
 from Sounds.SoundFuncs import SoundFuncs
+
+from TripSummaryPage import TripSummaryPage
 
 class DriverReportsPage: #will show list of incidents
     def openDriverReportsPage(homePageWindow, user):
+        listBoxArray = DriverReportsPage.makeListBoxArray(user['driverReports'])
         #driverReportPage_active = True
         #arrOfDriverReports = DriverReportsPage.makeListBoxArray(user['driverReports'][len(user['driverReports']) - 1])
-        driverReportLayout = [[sg.Button('Ok')], [sg.Button('Back')],
-                                [sg.Listbox('hi', 'hi')]]
+        driverReportLayout = [[sg.Button('Open Selected Driver Report')], [sg.Button('Back')],
+                                [sg.Listbox(listBoxArray, enable_events=True, size=(30,6), 
+                                            auto_size_text=True, key='-LIST-', select_mode= 'single')]]
 
         driverReportsPageWindow = sg.Window(
             'Driver Reports',
             driverReportLayout,
-            no_titlebar=False,
+            no_titlebar= False,
             location=(0, 0),
             size=(800, 480),
             finalize=True)  #set no_titlebar to true later
-        driverReportsPageWindow.Maximize()
+        #driverReportsPageWindow.Maximize()
 
         while True:
             event1, values1 = driverReportsPageWindow.read()
@@ -28,13 +34,17 @@ class DriverReportsPage: #will show list of incidents
                 return user
                 break
 
-            if event1 == 'Ok':
+            if event1 == 'Open Selected Driver Report': #open driver report that corresponds with the selected item
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
-                print("Ok button pressed")
+                print(str(values1['-LIST-'][0])) 
+                userDriverReportsIndex = listBoxArray.index(values1['-LIST-'][0]) 
+                userDriverReportsIndex = (len(listBoxArray) - 1) - userDriverReportsIndex
+                TripSummaryPage.openTripSummaryPage(user['driverReports'][userDriverReportsIndex])
 
-    def makeListBoxArray(arrayOfDriverReports):
+    def makeListBoxArray(arrayOfDriverReports): #represents array of driver reports as array of strings to store in list box
         arr = []
-        for i in range(0, len(arrayOfDriverReports)): #create string with all the basic information about driver report
-            str = arrayOfDriverReports[i]
-            arr.append(str)
+        #Use reversed loop to show the latest driver reports first in the 
+        for i in reversed(range(len(arrayOfDriverReports))): #create string with all the basic information about driver report
+            string = "Score:" + str(arrayOfDriverReports[i]['score']) + '  ' + arrayOfDriverReports[i]['date'] + '  ' + arrayOfDriverReports[i]['startTime']
+            arr.append(string)
         return arr

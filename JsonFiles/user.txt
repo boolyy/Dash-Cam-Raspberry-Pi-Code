@@ -1,8 +1,24 @@
 {
-    "aveScore": 100,
-    "driverReports": [],
+    "aveScore": 50.0,
+    "driverReports": [
+        {
+            "score": 50,
+            "date": "03/05/2021",
+            "startTime": "18:22",
+            "endTime": "18:23",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "18:22",
+                    "date": "03/05/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 50,
+                    "videoTitle": "03/05/2021 Ran over a pedestrian 18:22"
+                }
+            ]
+        }
+    ],
     "voiceToggle": true,
     "collisionDetectionToggle": true,
-    "numOfDriverReports": 0,
-    "dataCreated": "02/28/2021"
+    "numOfDriverReports": 1,
+    "dateCreated": "03/05/2021"
 }

@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
 from tflite_runtime.interpreter import Interpreter
+
 # deep sort imports
 from deep_sort import preprocessing, nn_matching
 from deep_sort.detection import Detection
@@ -202,4 +203,4 @@ def startRecording_YOLO():
         
 
 
-#startRecording_YOLO()
+startRecording_YOLO()
