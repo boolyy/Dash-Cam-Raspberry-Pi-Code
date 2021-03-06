@@ -7,8 +7,6 @@ from Sounds.SoundFuncs import SoundFuncs
 
 class TripSummaryPage:
     def openTripSummaryPage(driverReport):
-        #MAKE IT SHOW LIST OF
-        #arrOfIncidents = TripSummaryPage.makeListBoxArray(user['driverReports'][len(user['driverReports']) - 1]['arrayOfIncidents']) #creates array that will be displayed in list box
         tripSummaryLayout = [[sg.Text(text='Trip Summary')], [sg.Text(text='Incidents')], [sg.Listbox(TripSummaryPage.makeListBoxArray(driverReport['arrayOfIncidents']), size = (30, 6))], 
                             [sg.Button('OK')]]
         

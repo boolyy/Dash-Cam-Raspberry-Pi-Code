@@ -22,7 +22,8 @@ class RecordingPage: #Page that opens when user starts recording
                                     endTime='',
                                     arrayOfIncidents=[])
                                     
-        recordingPageLayout = [[sg.Button('Stop Recording')]]
+        recordingPageLayout = [[sg.Button('Stop Recording')], 
+                                [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]]
 
         recordingPageWindow = sg.Window('Recording',
                                         recordingPageLayout,
@@ -31,7 +32,7 @@ class RecordingPage: #Page that opens when user starts recording
                                         size=(800, 480),
                                         finalize=True)
         #recordingPageWindow.Maximize()
-        incidentOccured = True
+        incidentOccured = False
         while True:
 
             if incidentOccured == True: #if some incident occurs
@@ -68,6 +69,14 @@ class RecordingPage: #Page that opens when user starts recording
 
                 return user
                 break
+            
+            if event == '-INCIDENT-':
+                today = date.today() #get current time
+                incident = Incident(today.strftime("%m/%d/%Y"), time.strftime('%H:%M'), 
+                                    'Ran over a pedestrian', 50)
+                driverReport.arrayOfIncidents.append(incident.__dict__) #append incident to list of incidents in a dict format
+
+                
 
            
                 

@@ -36,11 +36,12 @@ class DriverReportsPage: #will show list of incidents
 
             if event1 == 'Open Selected Driver Report': #open driver report that corresponds with the selected item
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
-                print(str(values1['-LIST-'][0])) 
-                userDriverReportsIndex = listBoxArray.index(values1['-LIST-'][0]) 
-                userDriverReportsIndex = (len(listBoxArray) - 1) - userDriverReportsIndex
-                TripSummaryPage.openTripSummaryPage(user['driverReports'][userDriverReportsIndex])
 
+                if(values1['-LIST-']): #make sure that something is selected in List Box
+                    userDriverReportsIndex = listBoxArray.index(values1['-LIST-'][0]) #get index of driver report representation in listbox array
+                    userDriverReportsIndex = (len(listBoxArray) - 1) - userDriverReportsIndex #get index of driver report in user dict
+                    TripSummaryPage.openTripSummaryPage(user['driverReports'][userDriverReportsIndex])
+        
     def makeListBoxArray(arrayOfDriverReports): #represents array of driver reports as array of strings to store in list box
         arr = []
         #Use reversed loop to show the latest driver reports first in the 
