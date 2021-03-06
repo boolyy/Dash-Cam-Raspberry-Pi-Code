@@ -27,7 +27,7 @@ from deep_sort import preprocessing, nn_matching
 from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
 from tools import generate_detections as gdet
-
+import lanes as lane_detect
 sys.path.append('../')
 PROJECT_DIR = os.getcwd()
                              
@@ -183,6 +183,10 @@ def startRecording_YOLO():
             class_name = track.get_class()
 
             if class_name == 'person': print('person found')
+
+        #change frame to that which showcases the lane detection
+        #frame = lane_detect.detect_edges(frame) #COMMENT OUT IF/WHEN ERROR OCCURS
+
         #draw bounded box on screen
             color = colors[int(track.track_id) % len(colors)]
             color = [i * 255 for i in color]
