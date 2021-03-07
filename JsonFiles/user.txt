@@ -58,10 +58,25 @@
                     "videoTitle": "03/06/2021 Ran over a pedestrian 13:51"
                 }
             ]
+        },
+        {
+            "score": 100,
+            "date": "03/06/2021",
+            "startTime": "16:37",
+            "endTime": "16:38",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "16:38",
+                    "date": "03/06/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 50,
+                    "videoTitle": "03/06/2021 Ran over a pedestrian 16:38"
+                }
+            ]
         }
     ],
     "voiceToggle": true,
     "collisionDetectionToggle": true,
-    "numOfDriverReports": 2,
+    "numOfDriverReports": 3,
     "dateCreated": "03/06/2021"
 }
