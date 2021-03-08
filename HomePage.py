@@ -23,6 +23,7 @@ class HomePage:
             [sg.Button('Start Recording', size=(10, 10))],
             [sg.Text(text=datetime.datetime.now().strftime('%m/%d/%Y'), key='-DATE-')],
             [sg.Text(text=time.strftime('%H:%M'), key='-TIME-')],
+            [sg.Text(text='Score: ' + str(user['aveScore']), key= '-SCORE-')],
             [sg.Button('Settings')], [sg.Button('View Driver Reports')], 
             [sg.Button('Power Off')], [sg.Button('Parking Mode')]
         ]
@@ -48,7 +49,8 @@ class HomePage:
                 print("Clicked Start Recording")
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = RecordingPage.openRecordingPage(homePageWindow, user)
-
+                homePageWindow['-SCORE-'].update('Score: ' + str(user['aveScore']))
+                homePageWindow.refresh()
             if event == 'View Driver Reports':  #and not driverReportPage_active:
                 SoundFuncs.playSound('Sounds/menuButtonClick.mp3') #play button click sound
                 user = DriverReportsPage.openDriverReportsPage(

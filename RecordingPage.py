@@ -71,14 +71,4 @@ class RecordingPage: #Page that opens when user starts recording
                 break
             
             if event == '-INCIDENT-':
-                today = date.today() #get current time
-                incident = Incident(today.strftime("%m/%d/%Y"), time.strftime('%H:%M'), 
-                                    'Ran over a pedestrian', 50)
-                driverReport.arrayOfIncidents.append(incident.__dict__) #append incident to list of incidents in a dict format
-
-                
-
-           
-                
-                
-
+                incidentOccured = True

@@ -14,4 +14,4 @@ class User:
         total = 0
         for i in range(0, len(user['driverReports'])):
             total += user['driverReports'][i]['score']
-        return (total/user['numOfDriverReports'])
+        return round((total/user['numOfDriverReports']), 2)
