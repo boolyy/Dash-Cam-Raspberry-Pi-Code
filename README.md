@@ -15,5 +15,6 @@ Installation: Install the following modules using pip or any package manager of 
 - easydict
 - matplotlib
 - pillow
+- python-vlc
  
 Simply run the main.py file in order to use the app.
