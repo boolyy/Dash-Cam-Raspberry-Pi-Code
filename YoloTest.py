@@ -20,7 +20,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
-from tflite_runtime.interpreter import Interpreter
+#from tflite_runtime.interpreter import Interpreter
 
 # deep sort imports
 from deep_sort import preprocessing, nn_matching
@@ -59,7 +59,7 @@ input_size = 416
 #Establish a tflite model framework for the Tensorflow Interpreter
 
 #os.path.join(PROJECT_DIR, 'tfModels', 'GoogleSample', 'detect.tflite')
-interpreter = Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'))
+interpreter = tf.lite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'))
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
@@ -85,6 +85,7 @@ def startRecording_YOLO():
     #while video is running/recording
     while True:
         return_val, frame = vid.read()
+        start_time = time.time()
         if return_val:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image = Image.fromarray(frame)
@@ -102,7 +103,7 @@ def startRecording_YOLO():
         #if floating_model:
          #   image_data = (np.float32(image_data) - 127.5)/127.5
         image_data = image_data[np.newaxis, ...].astype(np.float32) #Converts image data to a float32 type
-        start_time = time.time()
+        
 
         #TFLite Detections
         interpreter.set_tensor(input_details[0]['index'], image_data)
@@ -187,16 +188,23 @@ def startRecording_YOLO():
         #change frame to that which showcases the lane detection
         #frame = lane_detect.detect_edges(frame) #COMMENT OUT IF/WHEN ERROR OCCURS
 
+        #distance approximation (barebones, needs more adjusting)
+            cam_parameter = 18    #change with different cameras. Gets the detected distance closer to actual distance
+            distance = (np.pi)/(bbox[2].item() + bbox[3].item()) * 1000 + cam_parameter
+            det_dest = str(int(distance))
+    
         #draw bounded box on screen
             color = colors[int(track.track_id) % len(colors)]
             color = [i * 255 for i in color]
             cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), color, 2)
-            cv2.rectangle(frame, (int(bbox[0]), int(bbox[1] - 30)), (int(bbox[0]) + (len(class_name) + len(str(track.track_id))) * 17, int(bbox[1])), color, -1)
-            cv2.putText(frame, class_name + "-" + str(track.track_id), (int(bbox[0]), int(bbox[1] - 10)), 0, 0.75, (255, 255, 255), 2)
-
+            cv2.rectangle(frame, (int(bbox[0]), int(bbox[1] - 30)), (int(bbox[0]) + (len(class_name) + len(det_dest)) * 18, int(bbox[1])), color, -1)
+            #cv2.putText(frame, class_name + "-" + str(track.track_id), (int(bbox[0]), int(bbox[1] - 10)), 0, 0.75, (255, 255, 255), 2)
+            cv2.putText(frame, class_name + ": " + str(int(distance)), (int(bbox[0]), int(bbox[1] - 10)), 0, 0.75, (255, 255, 255), 2)
+        
         #calculate fps of running detections
         fps = 1.0/ (time.time() - start_time)
         print("FPS: %.2f" % fps)
+        cv2.putText(frame, "FPS: " + str(int(fps)), (width - 100, height - 20),0, 0.75, (255,255,255),2)
         result = np.asarray(frame)
         result = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         cv2.imshow("Output Video", result)
