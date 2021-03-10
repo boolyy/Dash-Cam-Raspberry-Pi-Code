@@ -36,16 +36,7 @@ class RecordingPage: #Page that opens when user starts recording
         while True:
 
             if incidentOccured == True: #if some incident occurs
-                #update current score
-                #make incident object
-                today = date.today() #get current time
-                incident = Incident(today.strftime("%m/%d/%Y"), time.strftime('%H:%M'), 
-                                    'Ran over a pedestrian', 50)
-                print("video title: " + incident.videoTitle)
-                #alter driver report
-                driverReport.score -= incident.incidentValue
-                driverReport.arrayOfIncidents.append(incident.__dict__) #append incident to list of incidents in a dict format
-
+                Incident.incidentHappened(user, driverReport, 'ranOverPedestrian')
                 incidentOccured = False
                 
             event, values = recordingPageWindow.read()
@@ -54,15 +45,9 @@ class RecordingPage: #Page that opens when user starts recording
                 #update user object
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 driverReport.endTime = time.strftime('%H:%M') #update end time of driverReport object
-
-                #print(str(user['numOfDriverReports']))
-                user['numOfDriverReports'] = user['numOfDriverReports'] + 1
-
+                user['numOfDriverReports'] = user['numOfDriverReports'] + 1 
                 user['driverReports'].append(driverReport.__dict__)
-                #make ave score
-                user['aveScore'] = User.calcAveScore(user)
-                print('Ave Score ' + str(user['aveScore']))
-                #user['aveScore'] += 100
+                user['aveScore'] = User.calcAveScore(user) #update user's average score
                 JsonFuncs.writeUserData(user)  #update JSON file
                 TripSummaryPage.openTripSummaryPage(user['driverReports'][len(user['driverReports']) - 1]) #open trip summary page that will show user's a summary of their current trip
                 recordingPageWindow.Close()  #close recording page

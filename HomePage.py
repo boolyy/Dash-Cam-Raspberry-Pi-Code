@@ -7,9 +7,9 @@ import PySimpleGUI as sg
 import Sounds
 from DriverReportsPage import DriverReportsPage
 from JsonFiles.JsonFuncs import JsonFuncs
+from ParkingModePage import ParkingModePage
 from RecordingPage import RecordingPage
 from SettingsPage import SettingsPage
-from ParkingModePage import ParkingModePage
 from Sounds.SoundFuncs import SoundFuncs
 
 
@@ -39,30 +39,30 @@ class HomePage:
 
 
         while True:
+
             event, values = homePageWindow.read()
+            
             if event == sg.WIN_CLOSED or event == 'Power Off':  # if user closes window, end program
                 SoundFuncs.playSound('Sounds/menuButtonClick.mp3')
                 homePageWindow.Close()
                 break
 
             if event == 'Start Recording':
-                print("Clicked Start Recording")
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = RecordingPage.openRecordingPage(homePageWindow, user)
                 homePageWindow['-SCORE-'].update('Score: ' + str(user['aveScore']))
                 homePageWindow.refresh()
+
             if event == 'View Driver Reports':  #and not driverReportPage_active:
                 SoundFuncs.playSound('Sounds/menuButtonClick.mp3') #play button click sound
                 user = DriverReportsPage.openDriverReportsPage(
                     homePageWindow, user)
 
             if event == 'Settings':
-                print('Settings')
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = SettingsPage.openSettingsPage(user)
 
             if event == 'Parking Mode':
-                print("Parking mode")
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = ParkingModePage.openParkingModePage(user)
 
