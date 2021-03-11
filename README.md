@@ -5,16 +5,16 @@ The menuButtonClick sound is from ZapSplat.com
 
 Installation: Install the following modules using pip or any package manager of your choice
 
-- pysimplegui
+- pysimplegui - 4.35.0
 - pygame
 - opencv-python
-- lxml
+- lxml - 
 - tqdm
-- tensorflow
+- tensorflow - 2.3.0
 - absl-py
 - easydict
 - matplotlib
 - pillow
-- python-vlc
+- python-vlc - 3.0.11115
  
 Simply run the main.py file in order to use the app.
