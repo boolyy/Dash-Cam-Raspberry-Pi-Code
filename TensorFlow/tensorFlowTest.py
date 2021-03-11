@@ -17,7 +17,7 @@ with open(PATH_TO_LABELS, 'r') as f:
     labels = [line.strip() for line in f.readlines()]
 
 #Meant for the sample Google provides on tensorflow.org
-if labels[0] = '???': del(labels[0])
+if labels[0] == '???': del(labels[0])
 
 #Change when the EDGE TPU comes to iterpreter = 
 # Interpreter(model_path=PATH_TO_CKPT, experimental_delegates=[load_delegate('libedgetpu.so.1.0')])
@@ -33,7 +33,7 @@ width = input_details[0]['shape'][2]
 current_fps = 1
 freq = cv2.getTickFrequency()
 
-floating_model = (input_details[0]['dtype'] = np.float32)
+floating_model = (input_details[0]['dtype'] == np.float32)
 
 input_mean = 127.5
 input_std = 127.5
