@@ -28,6 +28,7 @@ from deep_sort.detection import Detection
 from deep_sort.tracker import Tracker
 from tools import generate_detections as gdet
 import lanes as lane_detect
+from threading import Thread
 sys.path.append('../')
 PROJECT_DIR = os.getcwd()
                              
@@ -37,6 +38,41 @@ PROJECT_DIR = os.getcwd()
 #with open(os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4416model.tflite') , 'wb') as f:
     #f.write(tflite_model)
 
+# Define VideoThread class to handle streaming of video from webcam in separate processing thread
+# Source - Adrian Rosebrock, PyImageSearch: https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
+class VideoThread:
+    def __init__ (self, resolution=(640,480), framerate=30):
+        #Initialize Camera
+        self.stream = cv2.VideoCapture(0)
+        ret = self.stream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'XVID'))
+        ret = self.stream.set(3, resolution[0])
+        ret = self.stream.set(4, resolution[1])
+
+        #Read First frame from the stream
+        self.grabbed, self.frame = self.stream.read()
+
+        #Variable to control when the camera is stopped
+        self.stopped = False
+    
+    def start(self):
+        #Start the thread that reads frames from the video stream
+        Thread(target=self.update, args=()).start()
+        return self
+    
+    def update(self):
+        #Loops until thread is stopped
+        while True:
+            if self.stopped: self.stream.release()
+            return
+
+            self.grabbed, self.frame = self.stream.read()
+    
+    #Returns the most recent frame
+    def read(self):
+        return self.stream.read()
+    
+    def stop(self):
+        self.stopped = True
 
 #initialize deep sort (increases frame rate with Yolo V4)
 model_path = os.path.join(PROJECT_DIR, 'YoloV4', 'model_data', 'mars-small128.pb')
@@ -82,6 +118,7 @@ def startRecording_YOLO():
     date_and_time = time.strftime("%Y%m%d-%H-%M-%S") #Stores current date and time in YYYY-MM-DD-HH:MM format
     vid_out_path = os.path.join(PROJECT_DIR, 'YoloV4', 'outputs', date_and_time + '.avi')
     vid = cv2.VideoCapture(0) #0 for webcam/Raspberry Pi Cam
+    videothread = VideoThread(resolution=(640,480), framerate=30).start()
 
     width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -93,7 +130,7 @@ def startRecording_YOLO():
 
     #while video is running/recording
     while True:
-        return_val, frame = vid.read()
+        return_val, frame = videothread.read()
         start_time = time.time()
         if return_val:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -221,6 +258,7 @@ def startRecording_YOLO():
         output_video.write(result)
         if cv2.waitKey(1) & 0xFF == ord('q'): break
     cv2.destroyAllWindows()
+    videothread.stop()
         
 
 
