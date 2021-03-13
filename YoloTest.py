@@ -120,9 +120,9 @@ def startRecording_YOLO():
     vid = cv2.VideoCapture(0) #0 for webcam/Raspberry Pi Cam
     videothread = VideoThread(resolution=(640,480), framerate=30).start()
 
-    width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fps = int(vid.get(cv2.CAP_PROP_FPS))
+    width = int(videothread.stream.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(videothread.stream.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fps = int(videothread.stream.get(cv2.CAP_PROP_FPS))
     codec = cv2.VideoWriter_fourcc(*'XVID')
     output_video = cv2.VideoWriter(vid_out_path, codec, fps, (width,height))
 
