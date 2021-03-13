@@ -20,7 +20,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tensorflow.compat.v1 import ConfigProto
 from tensorflow.compat.v1 import InteractiveSession
-#from tflite_runtime.interpreter import Interpreter
+
 
 # deep sort imports
 from deep_sort import preprocessing, nn_matching
@@ -58,8 +58,16 @@ input_size = 416
 
 #Establish a tflite model framework for the Tensorflow Interpreter
 
+#Change use_TPU to True when using the Coral USB Accelerator
+use_TPU = False
+if use_TPU:
+    from tensorflow.lite.python.interpreter import load_delegate
+    interpreter = tf.lite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'),
+                                      experimental_delegates=[load_delegate('libedgetpu.so.1.0')])
+else:
+    interpreter = tf.lite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'))
+
 #os.path.join(PROJECT_DIR, 'tfModels', 'GoogleSample', 'detect.tflite')
-interpreter = tf.lite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'))
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
@@ -67,6 +75,7 @@ print(output_details)
 
 floating_model = (input_details[0]['dtype'] == np.float32)
 #print(input_details)
+
 
 
 def startRecording_YOLO():
