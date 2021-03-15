@@ -5,11 +5,9 @@ import time
 import datetime
 import sys
 import tensorflow as tf
-physical_devices = tf.config.experimental.list_physical_devices('GPU')
-if len(physical_devices) > 0:
-    tf.config.experimental.set_memory_growth(physical_devices[0], True)
-from absl import app, flags, logging
-from absl.flags import FLAGS
+
+#from absl import app, flags, logging
+#from absl.flags import FLAGS
 import core.utils as utils
 from core.yolov4 import filter_boxes
 from tensorflow.python.saved_model import tag_constants
@@ -40,10 +38,11 @@ PROJECT_DIR = os.getcwd()
 
 # Define VideoThread class to handle streaming of video from webcam in separate processing thread
 # Source - Adrian Rosebrock, PyImageSearch: https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
+test_drive = os.path.join(PROJECT_DIR, 'YoloV4', 'outputs', 'testDriveS8.mp4')
 class VideoThread:
     def __init__ (self, resolution=(640,480), framerate=30):
         #Initialize Camera
-        self.stream = cv2.VideoCapture(0)
+        self.stream = cv2.VideoCapture(test_drive)
         ret = self.stream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'XVID'))
         ret = self.stream.set(3, resolution[0])
         ret = self.stream.set(4, resolution[1])
@@ -95,13 +94,14 @@ input_size = 416
 #Establish a tflite model framework for the Tensorflow Interpreter
 
 #Change use_TPU to True when using the Coral USB Accelerator
+import tflite_runtime.interpreter as tflite
 use_TPU = False
 if use_TPU:
-    from tensorflow.lite.python.interpreter import load_delegate
-    interpreter = tf.lite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'),
-                                      experimental_delegates=[load_delegate('libedgetpu.so.1.0')])
+    interpreter = tflite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-relu_edgetpu.tflite'),
+                                      experimental_delegates=[tflite.load_delegate('libedgetpu.so.1')])
 else:
-    interpreter = tf.lite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'))
+    
+    interpreter = tflite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'))
 
 #os.path.join(PROJECT_DIR, 'tfModels', 'GoogleSample', 'detect.tflite')
 interpreter.allocate_tensors()
@@ -117,7 +117,9 @@ floating_model = (input_details[0]['dtype'] == np.float32)
 def startRecording_YOLO():
     date_and_time = time.strftime("%Y%m%d-%H-%M-%S") #Stores current date and time in YYYY-MM-DD-HH:MM format
     vid_out_path = os.path.join(PROJECT_DIR, 'YoloV4', 'outputs', date_and_time + '.avi')
-    vid = cv2.VideoCapture(0) #0 for webcam/Raspberry Pi Cam
+    
+    
+    #vid = cv2.VideoCapture(test_drive) #0 for webcam/Raspberry Pi Cam
     videothread = VideoThread(resolution=(640,480), framerate=30).start()
 
     width = int(videothread.stream.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -125,14 +127,23 @@ def startRecording_YOLO():
     fps = int(videothread.stream.get(cv2.CAP_PROP_FPS))
     codec = cv2.VideoWriter_fourcc(*'XVID')
     output_video = cv2.VideoWriter(vid_out_path, codec, fps, (width,height))
-
+    
+    #width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
+    #height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    #fps = int(vid.get(cv2.CAP_PROP_FPS))
+    #codec = cv2.VideoWriter_fourcc(*'XVID')
+    #output_video = cv2.VideoWriter(vid_out_path, codec, fps, (width,height))
     frame_number = 0
+    freq = cv2.getTickFrequency()
 
     #while video is running/recording
     while True:
         return_val, frame = videothread.read()
-        start_time = time.time()
+        #return_val, frame = vid.read()
+        
+        
         if return_val:
+            #frame = cv2.flip(frame, -1)
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             image = Image.fromarray(frame)
         else:
@@ -149,7 +160,7 @@ def startRecording_YOLO():
         #if floating_model:
          #   image_data = (np.float32(image_data) - 127.5)/127.5
         image_data = image_data[np.newaxis, ...].astype(np.float32) #Converts image data to a float32 type
-        
+        start_time = time.time()
 
         #TFLite Detections
         interpreter.set_tensor(input_details[0]['index'], image_data)
