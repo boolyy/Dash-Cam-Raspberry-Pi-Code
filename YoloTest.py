@@ -29,12 +29,28 @@ import lanes as lane_detect
 from threading import Thread
 sys.path.append('../')
 PROJECT_DIR = os.getcwd()
-                             
+#train_imageswin = 'C:\Users\NC\Pictures\datasetyolo\coco\images\val2017'
+#train_images = os.path.join(PROJECT_DIR, 'YoloV4', 'data', 'dataset', 'val2017.txt')           
 #converts YoloV4 model to a tflite supported model (comment out when necessary)
-#converter = tf.lite.TFLiteConverter.from_saved_model(os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-416'))
-#flite_model = converter.convert()
-#with open(os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4416model.tflite') , 'wb') as f:
-    #f.write(tflite_model)
+#def representative_data_gen():
+ #   for input_value in tf.data.Dataset.from_tensor_slices(train_images).batch(1).take(100):
+  #      yield[input_value]
+
+#converter = tf.lite.TFLiteConverter.from_saved_model(os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416'))
+#converter.optimizations = [tf.lite.Optimize.DEFAULT]
+#converter.target_spec.supported_ops = [tf.uint8]
+#converter.representative_dataset = representative_data_gen
+#Ensure that if any ops can't be quantized, the converter throws an error
+#converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+#Set the input and output tensors to uint8 (for version 2.3.0)
+#converter.inference_input_type = tf.uint8
+#converter.inference_output_type = tf.uint8
+
+#tflite_model = converter.convert()
+#with open(os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4quant3.tflite') , 'wb') as f:
+ #   f.write(tflite_model)
+
+
 
 # Define VideoThread class to handle streaming of video from webcam in separate processing thread
 # Source - Adrian Rosebrock, PyImageSearch: https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
@@ -42,7 +58,7 @@ test_drive = os.path.join(PROJECT_DIR, 'YoloV4', 'outputs', 'testDriveS8.mp4')
 class VideoThread:
     def __init__ (self, resolution=(640,480), framerate=30):
         #Initialize Camera
-        self.stream = cv2.VideoCapture(test_drive)
+        self.stream = cv2.VideoCapture(0)
         ret = self.stream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'XVID'))
         ret = self.stream.set(3, resolution[0])
         ret = self.stream.set(4, resolution[1])
@@ -97,17 +113,16 @@ input_size = 416
 import tflite_runtime.interpreter as tflite
 use_TPU = False
 if use_TPU:
-    interpreter = tflite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-relu_edgetpu.tflite'),
+    interpreter = tflite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tinync-416_edgetpu.tflite'),
                                       experimental_delegates=[tflite.load_delegate('libedgetpu.so.1')])
 else:
-    
     interpreter = tflite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'))
 
 #os.path.join(PROJECT_DIR, 'tfModels', 'GoogleSample', 'detect.tflite')
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
-print(output_details)
+#print(output_details)
 
 floating_model = (input_details[0]['dtype'] == np.float32)
 #print(input_details)
@@ -135,12 +150,12 @@ def startRecording_YOLO():
     #output_video = cv2.VideoWriter(vid_out_path, codec, fps, (width,height))
     frame_number = 0
     freq = cv2.getTickFrequency()
+    avg_fps = 0
 
     #while video is running/recording
     while True:
         return_val, frame = videothread.read()
         #return_val, frame = vid.read()
-        
         
         if return_val:
             #frame = cv2.flip(frame, -1)
@@ -151,7 +166,7 @@ def startRecording_YOLO():
             break
         
         frame_number += 1
-        print('Frame #: ', frame_number)
+        #print('Frame #: ', frame_number)
         frame_size = frame.shape[:2]
         image_data = cv2.resize(frame, (input_size, input_size))
         image_data = image_data/ 255.
@@ -240,7 +255,7 @@ def startRecording_YOLO():
             bbox = track.to_tlbr()
             class_name = track.get_class()
 
-            if class_name == 'person': print('person found')
+            #if class_name == 'person': print('person found')
 
         #change frame to that which showcases the lane detection
         #frame = lane_detect.detect_edges(frame) #COMMENT OUT IF/WHEN ERROR OCCURS
@@ -260,7 +275,8 @@ def startRecording_YOLO():
         
         #calculate fps of running detections
         fps = 1.0/ (time.time() - start_time)
-        print("FPS: %.2f" % fps)
+        avg_fps = avg_fps + fps
+        #print("FPS: %.2f" % fps)
         cv2.putText(frame, "FPS: " + str(int(fps)), (width - 100, height - 20),0, 0.75, (255,255,255),2)
         result = np.asarray(frame)
         result = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
@@ -269,6 +285,8 @@ def startRecording_YOLO():
         output_video.write(result)
         if cv2.waitKey(1) & 0xFF == ord('q'): break
     cv2.destroyAllWindows()
+    print('Average FPS: ', (avg_fps/frame_number))
+    print('Number of Frames: ', frame_number)
     videothread.stop()
         
 

@@ -40,7 +40,7 @@ def average_slope_intercept(image, lines):
     for line in lines:
         for x1, y1, x2, y2 in line:
             if x1 == x2: 
-                print("Skipping vertical line segment: " + line)
+                print('Skipping vertical line segment: ' + line)
                 continue
             parameters = np.polyfit((x1, x2), (y1, y2), 1)
             slope = parameters[0]
@@ -102,7 +102,7 @@ def detect_edges(frame):
     return combined_image
 
 def test_code():
-    test_vod_path = os.path.join(os.getcwd(), 'YoloV4', 'outputs', 'test2.mp4')
+    test_vod_path = os.path.join(os.getcwd(), 'YoloV4', 'outputs', '20210313-18-41-09.avi')
     cap_test = cv2.VideoCapture(test_vod_path)
     while(cap_test.isOpened()):
         a, frame = cap_test.read()

@@ -1,0 +1,14 @@
+Edge TPU Compiler version 15.0.340273435
+Input: ./checkpoints/yolov4-tinync-416.tflite
+Output: yolov4-tinync-416_edgetpu.tflite
+
+Operator                       Count      Status
+
+CONCATENATION                  7          Mapped to Edge TPU
+PAD                            2          Mapped to Edge TPU
+LEAKY_RELU                     19         Operation not supported
+RESIZE_BILINEAR                1          Operation version not supported
+CONV_2D                        21         Mapped to Edge TPU
+QUANTIZE                       13         Mapped to Edge TPU
+MAX_POOL_2D                    3          Mapped to Edge TPU
+SPLIT                          3          Mapped to Edge TPU
