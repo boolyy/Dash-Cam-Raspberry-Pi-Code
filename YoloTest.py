@@ -113,7 +113,7 @@ input_size = 416
 import tflite_runtime.interpreter as tflite
 use_TPU = False
 if use_TPU:
-    interpreter = tflite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tinync-416_edgetpu.tflite'),
+    interpreter = tflite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-relu-int8_edgetpu.tflite'),
                                       experimental_delegates=[tflite.load_delegate('libedgetpu.so.1')])
 else:
     interpreter = tflite.Interpreter(model_path= os.path.join(PROJECT_DIR, 'YoloV4', 'checkpoints', 'yolov4-tiny-416.tflite'))
@@ -122,10 +122,10 @@ else:
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
-#print(output_details)
-
+print(output_details)
+print('-----------------------------')
 floating_model = (input_details[0]['dtype'] == np.float32)
-#print(input_details)
+print(input_details)
 
 
 
