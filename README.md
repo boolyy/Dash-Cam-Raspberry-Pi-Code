@@ -8,7 +8,7 @@ Installation: Install the following modules using pip or any package manager of 
 - pysimplegui - 4.35.0
 - pygame
 - opencv-python
-- lxml - 
+- lxml
 - tqdm
 - tensorflow - 2.3.0
 - absl-py
