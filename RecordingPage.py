@@ -10,6 +10,7 @@ from Objects.Incident import Incident
 from Objects.User import User
 from Sounds.SoundFuncs import SoundFuncs
 from TripSummaryPage import TripSummaryPage
+from TFLite_detection_cam import *
 
 
 class RecordingPage: #Page that opens when user starts recording
@@ -33,15 +34,39 @@ class RecordingPage: #Page that opens when user starts recording
                                         finalize=True)
         #recordingPageWindow.Maximize()
         incidentOccured = False
-        while True:
 
+        frame_rate_calc = 1
+        freq = cv2.getTickFrequency()
+
+        ''' ITEMS TO TRACK '''
+        person = 0
+        
+        videostream = VideoStream(resolution=(imW,imH),framerate=30).start()
+        #time.sleep(1)
+        while True:
+            t1 = cv2.getTickCount()
+            frame1 = videostream.read()
+            names, frame_rate_calc = capture(frame1, frame_rate_calc, t1)
+            #print(names)
+
+            # get count of items
+            personCount = names.get("person") if names.get("person") != None else 0
+
+            # only logs 1 incident if #people in frame > #people previous frame
+            if personCount > person:
+                Incident.incidentHappened(user, driverReport, 'ranOverPedestrian')
+            person = personCount
+            
             if incidentOccured == True: #if some incident occurs
                 Incident.incidentHappened(user, driverReport, 'ranOverPedestrian')
                 incidentOccured = False
-                
-            event, values = recordingPageWindow.read()
 
-            if event == sg.WINDOW_CLOSED or event == 'Stop Recording':
+            event, values = recordingPageWindow.read(timeout = 10)
+            
+            if event == sg.WINDOW_CLOSED or event == 'Stop Recording' or cv2.waitKey(1) == ord('q'):
+                cv2.destroyAllWindows()
+                videostream.stop()
+                
                 #update user object
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 driverReport.endTime = time.strftime('%H:%M') #update end time of driverReport object
@@ -57,3 +82,11 @@ class RecordingPage: #Page that opens when user starts recording
             
             if event == '-INCIDENT-':
                 incidentOccured = True
+
+            # Press 'q' to quit
+            #if cv2.waitKey(1) == ord('q'):
+            #   break
+
+        # Clean up
+        #cv2.destroyAllWindows()
+        #videostream.stop()    
