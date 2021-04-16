@@ -7,9 +7,17 @@ from Sounds.SoundFuncs import SoundFuncs
 
 class TripSummaryPage:
     def openTripSummaryPage(driverReport):
-        tripSummaryLayout = [[sg.Text(text='Trip Summary')], [sg.Text(text='Incidents')], 
-                            [sg.Listbox(TripSummaryPage.makeListBoxArray(driverReport['arrayOfIncidents']), size = (30, 6), key= '-LIST-')], 
-                            [sg.Button('OK')], [sg.Button('Open Video')]]
+        textLayout = [[sg.Text(text='', size = (10, 2))],
+                        [sg.Text(text='Trip Summary')], [sg.Text(text='Incidents')]]
+        columnLayout = [
+                            [sg.Listbox(TripSummaryPage.makeListBoxArray(driverReport['arrayOfIncidents']), size = (30, 15), key= '-LIST-')], 
+                            [sg.Button('OK'), sg.Button('Open Video')]]
+        
+        #tripSummaryLayout = [[sg.Text(text='Trip Summary')], [sg.Text(text='Incidents')], 
+        #                    [sg.Listbox(TripSummaryPage.makeListBoxArray(driverReport['arrayOfIncidents']), size = (30, 6), key= '-LIST-')], 
+        #                    [sg.Button('Back'), sg.Button('Open Video')]]
+        tripSummaryLayout = [[sg.Column(textLayout, vertical_alignment='center', justification='center')],
+                              [sg.Column(columnLayout, vertical_alignment='center', justification='center')]]
         
         tripSummaryPageWindow = sg.Window('Trip Summary',
                                           tripSummaryLayout,

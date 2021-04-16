@@ -88,7 +88,7 @@ LABELMAP_NAME = args.labels
 min_conf_threshold = float(args.threshold)
 resW, resH = args.resolution.split('x')
 imW, imH = int(resW), int(resH)
-use_TPU = True
+use_TPU = False
 
 # Import TensorFlow libraries
 # If tflite_runtime is installed, import interpreter from tflite_runtime, else import from regular tensorflow

@@ -12,20 +12,44 @@ from RecordingPage import RecordingPage
 from SettingsPage import SettingsPage
 from Sounds.SoundFuncs import SoundFuncs
 
-
 class HomePage:
     def openHomePage():  #user object will be passed in
         user = JsonFuncs.loadUserData()
 
         #maybe change theme based on time of day
         sg.theme('DarkAmber')
-        homeLayout = [
-            [sg.Button('Start Recording', size=(10, 10))],
+        
+        rightAligned = [
+            [sg.Button('Power Off')],
+            [sg.Button('Settings')]
+            ]
+        centerAlignedText = [
+            [sg.Text(text='', size = (10, 3))],
+            [sg.Text(text=datetime.datetime.now().strftime('%m/%d/%Y'), key='-DATE-', font=['Lucida', 24]),
+            sg.Text(text=time.strftime('%H:%M'), key='-TIME-', font=['Lucida', 24])],
+            [sg.Text(text='Score: ' + str(user['aveScore']), key= '-SCORE-', font=['Lucida', 15])],
+            [sg.Text(text='', size = (10, 2))]
+            ]
+        centerAligned = [
+            [sg.Button('Parking Mode', size=(15, 3), font=['Lucida', 18]),
+            sg.Text(text='', size = (1, 2)),
+            sg.Button('Start Recording', size=(15, 3), font=['Lucida', 18]),
+            sg.Text(text='', size = (1, 2)),
+            sg.Button('View Driver Reports', size=(15, 3), font=['Lucida', 18])]
+            ]
+
+        '''
+            [sg.Button('Power Off', 'right', size=(10,1))],
             [sg.Text(text=datetime.datetime.now().strftime('%m/%d/%Y'), key='-DATE-')],
             [sg.Text(text=time.strftime('%H:%M'), key='-TIME-')],
             [sg.Text(text='Score: ' + str(user['aveScore']), key= '-SCORE-')],
-            [sg.Button('Settings')], [sg.Button('View Driver Reports')], 
-            [sg.Button('Power Off')], [sg.Button('Parking Mode')]
+            [sg.Button('Settings', size=(15, 5)),
+            sg.Button('Start Recording', size=(15, 5)),
+            sg.Button('View Driver Reports', size=(15, 5))],'''
+        homeLayout = [
+            [sg.Column(rightAligned, vertical_alignment='right', justification='right', element_justification='right')],
+            [sg.Column(centerAlignedText, vertical_alignment='center', justification='center', element_justification='center')],
+            [sg.Column(centerAligned, vertical_alignment='center', justification='center')]
         ]
 
         homePageWindow = sg.Window(

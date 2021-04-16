@@ -10,9 +10,15 @@ class DriverReportsPage: #will show list of incidents
         listBoxArray = DriverReportsPage.makeListBoxArray(user['driverReports'])
         #driverReportPage_active = True
         #arrOfDriverReports = DriverReportsPage.makeListBoxArray(user['driverReports'][len(user['driverReports']) - 1])
-        driverReportLayout = [[sg.Button('Open Selected Driver Report')], [sg.Button('Back')],
-                                [sg.Listbox(listBoxArray, enable_events=True, size=(30,6), 
-                                            auto_size_text=True, key='-LIST-', select_mode= 'single')]]
+        columnLayout = [
+                    [sg.Text(text='', size = (10, 2))],
+                    [sg.Listbox(listBoxArray, enable_events=True, size=(30,20), 
+                        auto_size_text=True, key='-LIST-', select_mode= 'single')],
+                    [sg.Button('Back'), sg.Button('Open Selected Driver Report')]]
+        #driverReportLayout = [[sg.Button('Open Selected Driver Report')], [sg.Button('Back')],
+        #                        [sg.Listbox(listBoxArray, enable_events=True, size=(30,6), 
+        #                                    auto_size_text=True, key='-LIST-', select_mode= 'single')]]
+        driverReportLayout = [[sg.Column(columnLayout, vertical_alignment='center', justification='center')]]
 
         driverReportsPageWindow = sg.Window(
             'Driver Reports',
