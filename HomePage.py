@@ -3,6 +3,7 @@ import time
 
 import pygame
 import PySimpleGUI as sg
+import theme
 
 import Sounds
 from DriverReportsPage import DriverReportsPage
@@ -17,7 +18,7 @@ class HomePage:
         user = JsonFuncs.loadUserData()
 
         #maybe change theme based on time of day
-        sg.theme('DarkAmber')
+        sg.theme(theme.names[theme.index])
         
         rightAligned = [
             [sg.Button('Power Off')],
@@ -63,7 +64,7 @@ class HomePage:
 
 
         while True:
-
+            sg.theme(theme.names[theme.index])
             event, values = homePageWindow.read()
             
             if event == sg.WIN_CLOSED or event == 'Power Off':  # if user closes window, end program
@@ -81,14 +82,17 @@ class HomePage:
                 SoundFuncs.playSound('Sounds/menuButtonClick.mp3') #play button click sound
                 user = DriverReportsPage.openDriverReportsPage(
                     homePageWindow, user)
+                homePageWindow.refresh()
 
             if event == 'Settings':
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = SettingsPage.openSettingsPage(user)
+                homePageWindow.refresh()
 
             if event == 'Parking Mode':
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 user = ParkingModePage.openParkingModePage(user)
+                homePageWindow.refresh()
 
             #update time
             homePageWindow['-TIME-'].update(time.strftime('%H:%M'))

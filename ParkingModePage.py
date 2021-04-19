@@ -3,6 +3,7 @@ from datetime import date
 
 import pygame
 import PySimpleGUI as sg
+import theme
 
 import Sounds
 from JsonFiles.JsonFuncs import JsonFuncs
@@ -11,7 +12,7 @@ from Sounds.SoundFuncs import SoundFuncs
 
 class ParkingModePage:
     def openParkingModePage(user):
-
+        sg.theme(theme.names[theme.index])
         parkingPageLayout = [[sg.Text(text='Parking Mode Active')], [sg.Button('Stop Parking Mode')]]
 
         parkingPageWindow = sg.Window('Parking Mode', parkingPageLayout,

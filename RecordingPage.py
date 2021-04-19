@@ -3,6 +3,7 @@ from datetime import date
 
 import pygame
 import PySimpleGUI as sg
+import theme
 
 from JsonFiles.JsonFuncs import JsonFuncs
 from Objects.DriverReport import DriverReport
@@ -15,6 +16,8 @@ from TFLite_detection_cam import *
 
 class RecordingPage: #Page that opens when user starts recording
     def openRecordingPage(homePageWindow, user):
+        sg.theme(theme.names[theme.index])
+        
         #Make Driver Report object that will be created once recording is done
         today = date.today()
         driverReport = DriverReport(100,
@@ -22,9 +25,27 @@ class RecordingPage: #Page that opens when user starts recording
                                     startTime=time.strftime('%H:%M'),
                                     endTime='',
                                     arrayOfIncidents=[])
-                                    
+        deleteThisLayout = [
+            [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]
+            ]
+
+        bigButtonLayout = [
+            [sg.Text(text='', size = (10, 8))],
+            [sg.Button('Stop Recording', font=['Lucida', 50])]
+            ]
+
+        bottomTextLayout = [
+            [sg.Text(text='Recording In Progress...', font=['Lucida', 15])]
+            ]
+
+        recordingPageLayout = [
+            deleteThisLayout,
+            [sg.Column(bigButtonLayout, vertical_alignment='center', justification='center')],
+            [sg.Column(bottomTextLayout, vertical_alignment='center', justification='center')]
+            ]
+        '''                            
         recordingPageLayout = [[sg.Button('Stop Recording')], 
-                                [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]]
+                                [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]]'''
 
         recordingPageWindow = sg.Window('Recording',
                                         recordingPageLayout,

@@ -1,5 +1,5 @@
 {
-    "aveScore": -371.43,
+    "aveScore": -187.5,
     "driverReports": [
         {
             "score": -100,
@@ -287,10 +287,172 @@
                     "videoTitle": "04/16/2021 Ran over a pedestrian 11:37"
                 }
             ]
+        },
+        {
+            "score": 100,
+            "date": "04/18/2021",
+            "startTime": "21:15",
+            "endTime": "21:16",
+            "arrayOfIncidents": []
+        },
+        {
+            "score": -100,
+            "date": "04/18/2021",
+            "startTime": "21:21",
+            "endTime": "21:21",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "21:21",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:21"
+                },
+                {
+                    "timeOccured": "21:21",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:21"
+                }
+            ]
+        },
+        {
+            "score": -200,
+            "date": "04/18/2021",
+            "startTime": "21:22",
+            "endTime": "21:22",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "21:22",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:22"
+                },
+                {
+                    "timeOccured": "21:22",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:22"
+                },
+                {
+                    "timeOccured": "21:22",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:22"
+                }
+            ]
+        },
+        {
+            "score": -100,
+            "date": "04/18/2021",
+            "startTime": "21:22",
+            "endTime": "21:22",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "21:22",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:22"
+                },
+                {
+                    "timeOccured": "21:22",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:22"
+                }
+            ]
+        },
+        {
+            "score": 0,
+            "date": "04/18/2021",
+            "startTime": "21:23",
+            "endTime": "21:23",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "21:23",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:23"
+                }
+            ]
+        },
+        {
+            "score": 0,
+            "date": "04/18/2021",
+            "startTime": "21:23",
+            "endTime": "21:23",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "21:23",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:23"
+                }
+            ]
+        },
+        {
+            "score": -100,
+            "date": "04/18/2021",
+            "startTime": "21:24",
+            "endTime": "21:24",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "21:24",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:24"
+                },
+                {
+                    "timeOccured": "21:24",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:24"
+                }
+            ]
+        },
+        {
+            "score": 0,
+            "date": "04/18/2021",
+            "startTime": "21:52",
+            "endTime": "21:52",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "21:52",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 21:52"
+                }
+            ]
+        },
+        {
+            "score": 0,
+            "date": "04/18/2021",
+            "startTime": "22:04",
+            "endTime": "22:04",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "22:04",
+                    "date": "04/18/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/18/2021 Ran over a pedestrian 22:04"
+                }
+            ]
         }
     ],
     "voiceToggle": false,
-    "collisionDetectionToggle": true,
-    "numOfDriverReports": 7,
+    "collisionDetectionToggle": false,
+    "numOfDriverReports": 16,
     "dateCreated": "03/13/2021"
 }

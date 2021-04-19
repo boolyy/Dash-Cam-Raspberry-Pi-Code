@@ -1,4 +1,5 @@
 import PySimpleGUI as sg
+import theme
 
 import Sounds
 from Sounds.SoundFuncs import SoundFuncs
@@ -7,18 +8,23 @@ from TripSummaryPage import TripSummaryPage
 
 class DriverReportsPage: #will show list of incidents
     def openDriverReportsPage(homePageWindow, user):
+        sg.theme(theme.names[theme.index])
         listBoxArray = DriverReportsPage.makeListBoxArray(user['driverReports'])
         #driverReportPage_active = True
         #arrOfDriverReports = DriverReportsPage.makeListBoxArray(user['driverReports'][len(user['driverReports']) - 1])
-        columnLayout = [
+        textLayout = [
                     [sg.Text(text='', size = (10, 2))],
-                    [sg.Listbox(listBoxArray, enable_events=True, size=(30,20), 
-                        auto_size_text=True, key='-LIST-', select_mode= 'single')],
-                    [sg.Button('Back'), sg.Button('Open Selected Driver Report')]]
+                    [sg.Text(text='SELECT DRIVING REPORTS', font=['Lucida', 20])]
+                    ]
+        columnLayout = [
+                    [sg.Listbox(listBoxArray, enable_events=True, size=(30,12), 
+                        auto_size_text=True, key='-LIST-', select_mode= 'single', font=['Lucida', 14])],
+                    [sg.Button('Back', font=['Lucida', 14]), sg.Button('Open Selected Driver Report', font=['Lucida', 14])]]
         #driverReportLayout = [[sg.Button('Open Selected Driver Report')], [sg.Button('Back')],
         #                        [sg.Listbox(listBoxArray, enable_events=True, size=(30,6), 
         #                                    auto_size_text=True, key='-LIST-', select_mode= 'single')]]
-        driverReportLayout = [[sg.Column(columnLayout, vertical_alignment='center', justification='center')]]
+        driverReportLayout = [[sg.Column(textLayout, vertical_alignment='center', justification='center')],
+                              [sg.Column(columnLayout, vertical_alignment='center', justification='center')]]
 
         driverReportsPageWindow = sg.Window(
             'Driver Reports',
