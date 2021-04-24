@@ -13,7 +13,21 @@ from Sounds.SoundFuncs import SoundFuncs
 class ParkingModePage:
     def openParkingModePage(user):
         sg.theme(theme.names[theme.index])
-        parkingPageLayout = [[sg.Text(text='Parking Mode Active')], [sg.Button('Stop Parking Mode')]]
+
+        bigButtonLayout = [
+            [sg.Text(text='', size = (10, 10))],
+            [sg.Button('Stop Parking Mode', font=['Lucida', 50])]
+            ]
+
+        bottomTextLayout = [
+            [sg.Text(text='Parking Mode Active', font=['Lucida', 15])]
+            ]
+        
+        #parkingPageLayout = [[sg.Text(text='Parking Mode Active')], [sg.Button('Stop Parking Mode')]]
+        parkingPageLayout = [
+            [sg.Column(bigButtonLayout, vertical_alignment='center', justification='center')],
+            [sg.Column(bottomTextLayout, vertical_alignment='center', justification='center')]
+            ]
 
         parkingPageWindow = sg.Window('Parking Mode', parkingPageLayout,
                                         no_titlebar= False, location=(0,0),

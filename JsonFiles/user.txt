@@ -1,5 +1,5 @@
 {
-    "aveScore": -187.5,
+    "aveScore": -155.0,
     "driverReports": [
         {
             "score": -100,
@@ -449,10 +449,77 @@
                     "videoTitle": "04/18/2021 Ran over a pedestrian 22:04"
                 }
             ]
+        },
+        {
+            "score": -100,
+            "date": "04/24/2021",
+            "startTime": "15:50",
+            "endTime": "15:50",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "15:50",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 15:50"
+                },
+                {
+                    "timeOccured": "15:50",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 15:50"
+                }
+            ]
+        },
+        {
+            "score": 0,
+            "date": "04/24/2021",
+            "startTime": "15:52",
+            "endTime": "15:52",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "15:52",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 15:52"
+                }
+            ]
+        },
+        {
+            "score": 0,
+            "date": "04/24/2021",
+            "startTime": "15:55",
+            "endTime": "15:55",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "15:55",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 15:55"
+                }
+            ]
+        },
+        {
+            "score": 0,
+            "date": "04/24/2021",
+            "startTime": "15:55",
+            "endTime": "15:56",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "15:56",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 15:56"
+                }
+            ]
         }
     ],
     "voiceToggle": false,
     "collisionDetectionToggle": false,
-    "numOfDriverReports": 16,
+    "numOfDriverReports": 20,
     "dateCreated": "03/13/2021"
 }
