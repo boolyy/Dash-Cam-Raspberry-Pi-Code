@@ -29,10 +29,13 @@ import collections
 
 class VideoStream:
     """Camera object that controls video streaming from the Picamera"""
-    def __init__(self,resolution=(640,480),framerate=30):
+    def __init__(self,resolution=(640,480),framerate=30,path=0):
         # Initialize the PiCamera and the camera image stream
-        self.stream = cv2.VideoCapture(0)
-        ret = self.stream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+        if path == 0:
+            self.stream = cv2.VideoCapture(0)
+        else:
+            self.stream = cv2.VideoCapture(path)
+        ret = self.stream.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'XVID'))
         ret = self.stream.set(3,resolution[0])
         ret = self.stream.set(4,resolution[1])
             
@@ -225,9 +228,9 @@ def capture(frame1, frame_rate_calc, t1):
     t2 = cv2.getTickCount()
     time1 = (t2-t1)/freq
     frame_rate_calc = 1/time1
-
+    frame_ret = frame
     namesDict = collections.Counter(x if x else None for x in names)
 
-    return namesDict, frame_rate_calc
+    return namesDict, frame_rate_calc, frame_ret
 
 

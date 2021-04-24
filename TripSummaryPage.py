@@ -1,7 +1,8 @@
 import pygame
 import PySimpleGUI as sg
 import theme
-
+import time
+import cv2
 import Sounds
 from Sounds.SoundFuncs import SoundFuncs
 
@@ -32,6 +33,11 @@ class TripSummaryPage:
                                           size=(800, 480),
                                           finalize=True)
 
+        try:
+            preview_path = driverReport['vidPath']
+        except:
+            preview_path = 0
+
         while True:
             event, values = tripSummaryPageWindow.read()
             
@@ -40,8 +46,26 @@ class TripSummaryPage:
                 tripSummaryPageWindow.Close()
                 break
 
-            if event == 'Open Video':
+            if event == 'Open Video' and preview_path != 0:
                 print("Clicked Open Video")
+                cap = cv2.VideoCapture(preview_path)
+                cap_fps = int(cap.get(cv2.CAP_PROP_FPS))
+
+                while cap.isOpened():
+                    ret, f = cap.read()
+
+                    if ret == True:
+                        time.sleep(1/cap_fps)
+                        cv2.imshow('Report Video', f)
+                        if cv2.waitKey(1) and 0xFF == ord('q') or ret == False:
+                            break
+                    else:
+                        break
+                cap.release()
+                cv2.destroyAllWindows()
+            
+            else:
+                print("Video may have been deleted or renamed\n")
                 values['-LIST-']
                 
                 

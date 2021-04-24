@@ -1,5 +1,5 @@
 {
-    "aveScore": -155.0,
+    "aveScore": -191.67,
     "driverReports": [
         {
             "score": -100,
@@ -516,10 +516,178 @@
                     "videoTitle": "04/24/2021 Ran over a pedestrian 15:56"
                 }
             ]
+        },
+        {
+            "score": -100,
+            "date": "04/24/2021",
+            "startTime": "17:00",
+            "endTime": "17:01",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "17:01",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:01"
+                },
+                {
+                    "timeOccured": "17:01",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:01"
+                }
+            ]
+        },
+        {
+            "score": 0,
+            "date": "04/24/2021",
+            "startTime": "17:15",
+            "endTime": "17:16",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "17:15",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:15"
+                }
+            ],
+            "vidPath": "c:\\Users\\NC\\Documents\\Rutgers\\Capstone\\Dash-Cam-Raspberry-Pi-Code\\Videos\\20210424-17-15-19.mp4"
+        },
+        {
+            "score": -900,
+            "date": "04/24/2021",
+            "startTime": "17:20",
+            "endTime": "17:22",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "17:21",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:21"
+                },
+                {
+                    "timeOccured": "17:21",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:21"
+                },
+                {
+                    "timeOccured": "17:21",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:21"
+                },
+                {
+                    "timeOccured": "17:21",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:21"
+                },
+                {
+                    "timeOccured": "17:21",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:21"
+                },
+                {
+                    "timeOccured": "17:21",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:21"
+                },
+                {
+                    "timeOccured": "17:22",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:22"
+                },
+                {
+                    "timeOccured": "17:22",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:22"
+                },
+                {
+                    "timeOccured": "17:22",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:22"
+                },
+                {
+                    "timeOccured": "17:22",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:22"
+                }
+            ],
+            "vidPath": "c:\\Users\\NC\\Documents\\Rutgers\\Capstone\\Dash-Cam-Raspberry-Pi-Code\\Videos\\20210424-17-20-58.mp4"
+        },
+        {
+            "score": -500,
+            "date": "04/24/2021",
+            "startTime": "17:26",
+            "endTime": "17:28",
+            "arrayOfIncidents": [
+                {
+                    "timeOccured": "17:27",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:27"
+                },
+                {
+                    "timeOccured": "17:27",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:27"
+                },
+                {
+                    "timeOccured": "17:28",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:28"
+                },
+                {
+                    "timeOccured": "17:28",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:28"
+                },
+                {
+                    "timeOccured": "17:28",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:28"
+                },
+                {
+                    "timeOccured": "17:28",
+                    "date": "04/24/2021",
+                    "incidentType": "Ran over a pedestrian",
+                    "incidentValue": 100,
+                    "videoTitle": "04/24/2021 Ran over a pedestrian 17:28"
+                }
+            ],
+            "vidPath": "c:\\Users\\NC\\Documents\\Rutgers\\Capstone\\Dash-Cam-Raspberry-Pi-Code\\Videos\\20210424-17-26-42.mp4"
         }
     ],
     "voiceToggle": false,
     "collisionDetectionToggle": false,
-    "numOfDriverReports": 20,
+    "numOfDriverReports": 24,
     "dateCreated": "03/13/2021"
 }

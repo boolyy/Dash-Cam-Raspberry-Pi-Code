@@ -1,10 +1,10 @@
 import time
 from datetime import date
-
+import os
 import pygame
 import PySimpleGUI as sg
 import theme
-
+import cv2
 from JsonFiles.JsonFuncs import JsonFuncs
 from Objects.DriverReport import DriverReport
 from Objects.Incident import Incident
@@ -24,7 +24,8 @@ class RecordingPage: #Page that opens when user starts recording
                                     today.strftime("%m/%d/%Y"),
                                     startTime=time.strftime('%H:%M'),
                                     endTime='',
-                                    arrayOfIncidents=[])
+                                    arrayOfIncidents=[],
+                                    vidPath = '')
         #deleteThisLayout = [
         #    [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]
         #    ]
@@ -64,14 +65,27 @@ class RecordingPage: #Page that opens when user starts recording
         ''' ITEMS TO TRACK '''
         person = 0
         
-        videostream = VideoStream(resolution=(imW,imH),framerate=30).start()
+        #Creates Video File for the output
+        date_and_time = time.strftime("%Y%m%d-%H-%M-%S") #Stores current date and time in YYYY-MM-DD-HH:MM format
+        PROJECT_DIR = os.getcwd()
+        vid_out_path = os.path.join(PROJECT_DIR, 'Videos', date_and_time + '.mp4')
+
+        #Starts the Thread which streams the output
+        videostream = VideoStream(resolution=(imW,imH),framerate=30, path=0).start()
+
+        width = int(videostream.stream.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height = int(videostream.stream.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        fps = int(videostream.stream.get(cv2.CAP_PROP_FPS))
+        codec = cv2.VideoWriter_fourcc(*'XVID')
+        output_video = cv2.VideoWriter(vid_out_path, codec, fps, (width,height))
+        
         #time.sleep(1)
         while True:
             t1 = cv2.getTickCount()
             frame1 = videostream.read()
-            names, frame_rate_calc = capture(frame1, frame_rate_calc, t1)
+            names, frame_rate_calc, frame_out = capture(frame1, frame_rate_calc, t1)
             #print(names)
-
+            output_video.write(frame_out)
             # get count of items
             personCount = names.get("person") if names.get("person") != None else 0
 
@@ -93,6 +107,7 @@ class RecordingPage: #Page that opens when user starts recording
                 #update user object
                 SoundFuncs.playSound("Sounds/menuButtonClick.mp3")
                 driverReport.endTime = time.strftime('%H:%M') #update end time of driverReport object
+                driverReport.vidPath = vid_out_path
                 user['numOfDriverReports'] = user['numOfDriverReports'] + 1 
                 user['driverReports'].append(driverReport.__dict__)
                 user['aveScore'] = User.calcAveScore(user) #update user's average score
