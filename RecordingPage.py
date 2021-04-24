@@ -25,9 +25,9 @@ class RecordingPage: #Page that opens when user starts recording
                                     startTime=time.strftime('%H:%M'),
                                     endTime='',
                                     arrayOfIncidents=[])
-        deleteThisLayout = [
-            [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]
-            ]
+        #deleteThisLayout = [
+        #    [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]
+        #    ]
 
         bigButtonLayout = [
             [sg.Text(text='', size = (10, 8))],
@@ -39,13 +39,15 @@ class RecordingPage: #Page that opens when user starts recording
             ]
 
         recordingPageLayout = [
-            deleteThisLayout,
+            [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')],
             [sg.Column(bigButtonLayout, vertical_alignment='center', justification='center')],
             [sg.Column(bottomTextLayout, vertical_alignment='center', justification='center')]
             ]
+
         '''                            
         recordingPageLayout = [[sg.Button('Stop Recording')], 
-                                [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]]'''
+                                [sg.Button('Make incident happen (FOR TROUBLESHOOTING)', key='-INCIDENT-')]]
+        '''
 
         recordingPageWindow = sg.Window('Recording',
                                         recordingPageLayout,
