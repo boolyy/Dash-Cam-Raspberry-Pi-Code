@@ -52,11 +52,11 @@ class RecordingPage: #Page that opens when user starts recording
 
         recordingPageWindow = sg.Window('Recording',
                                         recordingPageLayout,
-                                        no_titlebar=False, 
+                                        no_titlebar=True, 
                                         location=(0, 0),
                                         size=(800, 480),
                                         finalize=True)
-        #recordingPageWindow.Maximize()
+        recordingPageWindow.Maximize()
         incidentOccured = False
 
         frame_rate_calc = 1

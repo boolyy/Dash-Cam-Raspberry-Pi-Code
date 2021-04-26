@@ -36,7 +36,7 @@ class HomePage:
             sg.Text(text='', size = (1, 2)),
             sg.Button('Start Recording', size=(15, 3), font=['Lucida', 18]),
             sg.Text(text='', size = (1, 2)),
-            sg.Button('View Driver Reports', size=(15, 3), font=['Lucida', 18])]
+            sg.Button('View Driver Reports', size=(17, 4), font=['Lucida', 14])]
             ]
 
         '''
@@ -47,6 +47,7 @@ class HomePage:
             [sg.Button('Settings', size=(15, 5)),
             sg.Button('Start Recording', size=(15, 5)),
             sg.Button('View Driver Reports', size=(15, 5))],'''
+
         homeLayout = [
             [sg.Column(rightAligned, vertical_alignment='right', justification='right', element_justification='right')],
             [sg.Column(centerAlignedText, vertical_alignment='center', justification='center', element_justification='center')],
@@ -56,11 +57,11 @@ class HomePage:
         homePageWindow = sg.Window(
             'Home',
             homeLayout,
-            no_titlebar=False,
+            no_titlebar=True,
             location=(0, 0),
             size=(800, 480),
-            finalize=True)  #set no_titleb ar to true later
-        #homePageWindow.Maximize()
+            finalize=True)  #set no_titlebar to true later
+        homePageWindow.Maximize()
 
 
         while True:

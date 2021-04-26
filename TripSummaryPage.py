@@ -28,10 +28,11 @@ class TripSummaryPage:
         
         tripSummaryPageWindow = sg.Window('Trip Summary',
                                           tripSummaryLayout,
-                                          no_titlebar=False,
+                                          no_titlebar=True,
                                           location=(0, 0),
                                           size=(800, 480),
                                           finalize=True)
+        tripSummaryPageWindow.Maximize()
 
         try:
             preview_path = driverReport['vidPath']

@@ -30,8 +30,9 @@ class ParkingModePage:
             ]
 
         parkingPageWindow = sg.Window('Parking Mode', parkingPageLayout,
-                                        no_titlebar= False, location=(0,0),
+                                        no_titlebar= True, location=(0,0),
                                         size=(800, 480), finalize= True)
+        parkingPageWindow.Maximize()
 
         while True:
             event, values = parkingPageWindow.read()

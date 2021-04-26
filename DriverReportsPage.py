@@ -29,11 +29,11 @@ class DriverReportsPage: #will show list of incidents
         driverReportsPageWindow = sg.Window(
             'Driver Reports',
             driverReportLayout,
-            no_titlebar= False,
+            no_titlebar= True,
             location=(0, 0),
             size=(800, 480),
             finalize=True)  #set no_titlebar to true later
-        #driverReportsPageWindow.Maximize()
+        driverReportsPageWindow.Maximize()
 
         while True:
             event1, values1 = driverReportsPageWindow.read()
